@@ -59,7 +59,7 @@ const changes = ({ tag: [date, version], from, fromLatestTag, to }) =>
             from ? ` --from ${from}` : '',
             to ? ` --to ${to}` : '',
             fromLatestTag ? ' --from-latest-tag' : '',
-            ` --setdate ${date}`,
+            // ` --setdate ${date}`,
         ].join('')
 
         exec(`clog ${args} --setversion ${version} -o CHANGELOG.md`, (err, stdout) => {
