@@ -1,20 +1,16 @@
-import { ReactNode, Fragment, createElement } from 'react'
-import {
-    // @ts-ignore
-    bindDefs,
-    useDimensions,
-    Container,
-    SvgWrapper,
-} from '@nivo/core'
+import { createElement, Fragment, ReactNode } from 'react'
+
 import { ArcLabelsLayer, ArcLinkLabelsLayer } from '@nivo/arcs'
 import { InheritedColorConfig } from '@nivo/colors'
-import PieLegends from './PieLegends'
-import { useNormalizedData, usePieFromBox, usePieLayerContext } from './hooks'
-import { ComputedDatum, PieLayer, PieSvgProps, PieLayerId } from './types'
-import { defaultProps } from './props'
-import { Arcs } from './Arcs'
+import { bindDefs, Container, SvgWrapper, useDimensions } from '@nivo/core'
 
-const InnerPie = <RawDatum,>({
+import { Arcs } from './Arcs'
+import { useNormalizedData, usePieFromBox, usePieLayerContext } from './hooks'
+import PieLegends from './PieLegends'
+import { defaultProps } from './props'
+import { ComputedDatum, PieLayer, PieLayerId, PieSvgProps } from './types'
+
+const InnerPie = <RawDatum extends { label?: string | number }>({
     data,
     id = defaultProps.id,
     value = defaultProps.value,
@@ -230,7 +226,7 @@ const InnerPie = <RawDatum,>({
     )
 }
 
-export const Pie = <RawDatum,>({
+export const Pie = <RawDatum extends { label?: string | number | undefined }>({
     isInteractive = defaultProps.isInteractive,
     animate = defaultProps.animate,
     motionConfig = defaultProps.motionConfig,

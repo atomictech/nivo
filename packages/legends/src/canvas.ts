@@ -1,12 +1,13 @@
 import { CompleteTheme, degreesToRadians } from '@nivo/core'
+
 import {
-    computeDimensions,
-    computePositionFromAnchor,
-    computeItemLayout,
     computeContinuousColorsLegend,
+    computeDimensions,
+    computeItemLayout,
+    computePositionFromAnchor,
 } from './compute'
-import { AnchoredContinuousColorsLegendProps, LegendCanvasProps } from './types'
 import { continuousColorsLegendDefaults } from './defaults'
+import { AnchoredContinuousColorsLegendProps, LegendCanvasProps } from './types'
 
 const textAlignMapping = {
     start: 'left',
@@ -196,7 +197,8 @@ export const renderContinuousColorLegendToCanvas = (
     }${theme.legends.ticks.text.fontSize}px ${theme.legends.ticks.text.fontFamily}`
 
     ticks.forEach(tick => {
-        if ((theme.legends.ticks.line.strokeWidth ?? 0) > 0) {
+        const strokeWidth = theme.legends.ticks.line.strokeWidth?.valueOf()
+        if (typeof strokeWidth === 'number' && strokeWidth > 0) {
             ctx.lineWidth = Number(theme.axis.ticks.line.strokeWidth)
             if (theme.axis.ticks.line.stroke) {
                 ctx.strokeStyle = theme.axis.ticks.line.stroke

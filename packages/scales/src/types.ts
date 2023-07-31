@@ -1,11 +1,12 @@
 import {
-    ScaleLinear as D3ScaleLinear,
-    ScalePoint as D3ScalePoint,
     ScaleBand as D3ScaleBand,
+    ScaleLinear as D3ScaleLinear,
     ScaleLogarithmic as D3ScaleLogarithmic,
+    ScalePoint as D3ScalePoint,
     ScaleSymLog as D3ScaleSymLog,
     ScaleTime as D3ScaleTime,
 } from 'd3-scale'
+
 import { TIME_PRECISION } from './timeHelpers'
 
 export type ScaleAxis = 'x' | 'y'
@@ -27,7 +28,7 @@ export interface ScaleTypeToSpec {
 export type ScaleType = keyof ScaleTypeToSpec
 export type ScaleSpec = ScaleTypeToSpec[keyof ScaleTypeToSpec]
 
-export interface ScaleTypeToScale<Input, Output> {
+export interface ScaleTypeToScale<Input extends StringValue, Output> {
     linear: ScaleLinear<Output>
     log: ScaleLog
     symlog: ScaleSymlog
@@ -36,10 +37,10 @@ export interface ScaleTypeToScale<Input, Output> {
     time: ScaleTime<Input>
 }
 
-export type Scale<Input, Output> = ScaleTypeToScale<Input, Output>[keyof ScaleTypeToScale<
+export type Scale<Input extends StringValue, Output> = ScaleTypeToScale<
     Input,
     Output
->]
+>[keyof ScaleTypeToScale<Input, Output>]
 
 export type ScaleLinearSpec = {
     type: 'linear'

@@ -1,10 +1,12 @@
 import { createElement, SVGProps, useMemo } from 'react'
-import { useSpring, useTransition } from '@react-spring/web'
-import { useMotionConfig, useTheme, positionFromAngle, degreesToRadians } from '@nivo/core'
-import { AnyScale, getScaleTicks } from '@nivo/scales'
+
 import { ArcLine } from '@nivo/arcs'
-import { CircularAxisConfig, CircularAxisTickAnimatedProps } from './types'
+import { degreesToRadians, positionFromAngle, useMotionConfig, useTheme } from '@nivo/core'
+import { AnyScale, getScaleTicks } from '@nivo/scales'
+import { useSpring, useTransition } from '@react-spring/web'
+
 import { CircularAxisTick } from './CircularAxisTick'
+import { CircularAxisConfig, CircularAxisTickAnimatedProps } from './types'
 
 type CircularAxisProps = {
     type: 'inner' | 'outer'
@@ -116,6 +118,7 @@ export const CircularAxis = ({
             <ArcLine
                 animated={spring}
                 {...(theme.axis.domain.line as Omit<SVGProps<SVGPathElement>, 'ref'>)}
+                // @ts-expect-error Can't find a way to properly type ArcLineProps
                 fill="none"
             />
             {transition((animatedProps, tick) =>

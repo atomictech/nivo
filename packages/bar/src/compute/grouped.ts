@@ -1,10 +1,11 @@
-import { Margin } from '@nivo/core'
 import { OrdinalColorScale } from '@nivo/colors'
-import { Scale, ScaleBand, computeScale } from '@nivo/scales'
+import { Margin } from '@nivo/core'
+import { computeScale, Scale, ScaleBand, StringValue } from '@nivo/scales'
+
 import { BarDatum, BarSvgProps, ComputedBarDatum, ComputedDatum } from '../types'
 import { coerceValue, filterNullValues, getIndexScale, normalizeData } from './common'
 
-type Params<RawDatum, XScaleInput, YScaleInput> = {
+type Params<RawDatum, XScaleInput extends StringValue, YScaleInput extends StringValue> = {
     data: RawDatum[]
     formatValue: (value: number) => string
     getColor: OrdinalColorScale<ComputedDatum<RawDatum>>

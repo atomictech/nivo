@@ -1,10 +1,11 @@
 import { createFactory } from 'react'
+
 import { setDisplayName } from './setDisplayName'
 import { InferableComponentEnhancerWithProps, Mapper } from './types'
 import { wrapDisplayName } from './wrapDisplayName'
 
 export const mapProps =
-    <TInner, TOuter>(
+    <TInner extends React.ClassAttributes<React.Component<unknown, any, any>>, TOuter>(
         propsMapper: Mapper<TOuter, TInner>
     ): InferableComponentEnhancerWithProps<TInner, TOuter> =>
     (BaseComponent: any): any => {

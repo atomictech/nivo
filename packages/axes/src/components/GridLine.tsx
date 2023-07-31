@@ -1,6 +1,7 @@
 import { memo } from 'react'
-import { SpringValues, animated } from '@react-spring/web'
+
 import { useTheme } from '@nivo/core'
+import { animated, SpringValues } from '@react-spring/web'
 
 export const GridLine = memo(
     ({
@@ -16,6 +17,6 @@ export const GridLine = memo(
     }) => {
         const theme = useTheme()
 
-        return <animated.line {...animatedProps} {...(theme.grid.line as unknown)} />
+        return <animated.line {...animatedProps} {...(theme.grid.line as object)} />
     }
 )

@@ -1,5 +1,6 @@
 import { scaleBand, ScaleBand as D3ScaleBand } from 'd3-scale'
-import { ComputedSerieAxis, ScaleBand, ScaleBandSpec, StringValue, ScaleAxis } from './types'
+
+import { ComputedSerieAxis, ScaleAxis, ScaleBand, ScaleBandSpec, StringValue } from './types'
 
 export const createBandScale = <Input extends StringValue>(
     { round = true }: ScaleBandSpec,
@@ -15,7 +16,7 @@ export const createBandScale = <Input extends StringValue>(
     return castBandScale<Input>(scale)
 }
 
-export const castBandScale = <Input>(scale: D3ScaleBand<Input>) => {
+export const castBandScale = <Input extends { toString(): string }>(scale: D3ScaleBand<Input>) => {
     const typedScale = scale as ScaleBand<Input>
     typedScale.type = 'band'
 

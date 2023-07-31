@@ -16,7 +16,7 @@ import { useNormalizedData, usePieFromBox } from './hooks'
 import { ComputedDatum, PieCanvasProps } from './types'
 import { defaultProps } from './props'
 
-const InnerPieCanvas = <RawDatum,>({
+const InnerPieCanvas = <RawDatum extends { label?: string | number }>({
     data,
     id = defaultProps.id,
     value = defaultProps.value,
@@ -283,7 +283,7 @@ const InnerPieCanvas = <RawDatum,>({
     )
 }
 
-export const PieCanvas = <RawDatum,>({
+export const PieCanvas = <RawDatum extends { label?: string | number | undefined }>({
     isInteractive = defaultProps.isInteractive,
     theme,
     renderWrapper,

@@ -1,6 +1,7 @@
-import { degreesToRadians, CompleteTheme } from '@nivo/core'
-import { ScaleValue, AnyScale, TicksSpec } from '@nivo/scales'
-import { computeCartesianTicks, getFormatter, computeGridLines } from './compute'
+import { CompleteTheme, degreesToRadians } from '@nivo/core'
+import { AnyScale, ScaleValue, TicksSpec } from '@nivo/scales'
+
+import { computeCartesianTicks, computeGridLines, getFormatter } from './compute'
 import { positions } from './props'
 import { AxisLegendPosition, CanvasAxisProps, ValueFormatter } from './types'
 
@@ -63,7 +64,8 @@ export const renderAxisToCanvas = <Value extends ScaleValue>(
         theme.axis.ticks.text.fontSize
     }px ${theme.axis.ticks.text.fontFamily}`
 
-    if ((theme.axis.domain.line.strokeWidth ?? 0) > 0) {
+    const strokeWidth = theme.axis.domain.line.strokeWidth?.valueOf()
+    if (typeof strokeWidth === 'number' && strokeWidth > 0) {
         ctx.lineWidth = Number(theme.axis.domain.line.strokeWidth)
         ctx.lineCap = 'square'
 
@@ -80,7 +82,8 @@ export const renderAxisToCanvas = <Value extends ScaleValue>(
     const format = typeof _format === 'function' ? _format : (value: unknown) => `${value}`
 
     ticks.forEach(tick => {
-        if ((theme.axis.ticks.line.strokeWidth ?? 0) > 0) {
+        const strokeWidth = theme.axis.ticks.line.strokeWidth?.valueOf()
+        if (strokeWidth && strokeWidth === 'number') {
             ctx.lineWidth = Number(theme.axis.ticks.line.strokeWidth)
             ctx.lineCap = 'square'
 

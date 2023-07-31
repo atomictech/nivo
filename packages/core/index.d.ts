@@ -1,7 +1,7 @@
-import * as React from 'react'
-import { Interpolation, SpringConfig } from '@react-spring/web'
 import { CurveFactory } from 'd3-shape'
-import { ComponentType } from 'react'
+import * as React from 'react'
+
+import { Interpolation, SpringConfig } from '@react-spring/web'
 
 declare module '@nivo/core' {
     export type DatumValue = string | number | Date
@@ -593,4 +593,21 @@ declare module '@nivo/core' {
     export type ExtractProps<TComponent> = TComponent extends ComponentType<infer TProps>
         ? TProps
         : never
+
+    // export const isMatchingDef: (
+    //     predicate: string | Function | object,
+    //     node: object,
+    //     dataKey?: string
+    // ) => boolean
+
+    export const bindDefs = (
+        defs: object[],
+        nodes: object[],
+        rules: object[],
+        {
+            dataKey,
+            colorKey = 'color',
+            targetKey = 'fill',
+        }: { dataKey?: string; colorKey?: string; targetKey?: string } = {}
+    ) => Array
 }

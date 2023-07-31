@@ -1,22 +1,23 @@
-import { useMemo } from 'react'
 import { scaleLinear } from 'd3-scale'
+import { useMemo } from 'react'
+
+import { useOrdinalColorScale } from '@nivo/colors'
 import {
-    // @ts-ignore
     bindDefs,
+    degreesToRadians,
     useCurveInterpolation,
     usePropertyAccessor,
     useValueFormatter,
 } from '@nivo/core'
-import { degreesToRadians } from '@nivo/core'
-import { useOrdinalColorScale } from '@nivo/colors'
+
 import { svgDefaultProps } from './props'
 import {
+    BoundLegendProps,
     RadarColorMapping,
     RadarCommonProps,
-    RadarDataProps,
     RadarCustomLayerProps,
+    RadarDataProps,
     RadarSvgProps,
-    BoundLegendProps,
 } from './types'
 
 export const useRadar = <D extends Record<string, unknown>>({
@@ -66,7 +67,7 @@ export const useRadar = <D extends Record<string, unknown>>({
     const { boundDefs, fillByKey } = useMemo(() => {
         // expand keys into structure expected by bindDefs
         const keyData = keys.map(k => ({ key: k, color: colorByKey[k], data, fill: null }))
-        const boundDefs = bindDefs(defs, keyData, fill)
+        const boundDefs = bindDefs(defs ?? [], keyData, fill ?? [])
         const fillByKey = keyData.reduce<Record<string, string | null>>((mapping, keyDatum) => {
             const { key: keyName, fill } = keyDatum
             mapping[keyName] = fill

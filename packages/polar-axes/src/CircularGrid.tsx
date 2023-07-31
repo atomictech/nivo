@@ -1,8 +1,9 @@
 import { SVGProps, useMemo } from 'react'
-import { useTransition } from '@react-spring/web'
-import { useTheme, useMotionConfig } from '@nivo/core'
-import { AnyScale, getScaleTicks } from '@nivo/scales'
+
 import { ArcLine } from '@nivo/arcs'
+import { useMotionConfig, useTheme } from '@nivo/core'
+import { AnyScale, getScaleTicks } from '@nivo/scales'
+import { useTransition } from '@react-spring/web'
 
 interface CircularGridProps {
     scale: AnyScale
@@ -83,6 +84,7 @@ export const CircularGrid = ({
                     key={item.id}
                     animated={style}
                     {...(theme.grid.line as Omit<SVGProps<SVGPathElement>, 'ref'>)}
+                    // @ts-expect-error Can't find a way to properly type ArcLineProps
                     strokeOpacity={style.opacity}
                     fill="none"
                 />
